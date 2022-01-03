@@ -1,3 +1,3 @@
 # OpenDocs Docker
 
-Docker images for OpenDocs
+Docker images for OpenDocs.
