@@ -101,6 +101,11 @@ RUN cd /home/opendocs && \
 WORKDIR /home/opendocs/opendocs
 
 # Install packages
+RUN sudo npm install --global yarn
+RUN export PATH="\$PATH"
+RUN PATH="\$PATH"
+RUN echo $PATH
+RUN source /home/opendocs/.bashrc
 RUN yarn install
 
 # Start command
