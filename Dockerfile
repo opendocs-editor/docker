@@ -112,7 +112,7 @@ RUN yarn install
 
 # Start command
 RUN echo "#!/bin/bash" > /home/opendocs/run.sh && \
-    echo "/usr/bin/mongod --config /etc/mongod.conf &" >> /home/opendocs/run.sh && \
+    echo "/usr/bin/sudo /usr/bin/mongod --config /etc/mongod.conf &" >> /home/opendocs/run.sh && \
     echo "cd /home/opendocs/opendocs" >> /home/opendocs/run.sh && \
     echo "/usr/bin/yarn test" >> /home/opendocs/run.sh
 
