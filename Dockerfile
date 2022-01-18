@@ -18,10 +18,8 @@ RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get -y install \
     sudo apt bash curl git \
-    wget build-essential gpg \
-    lsb-release libc6 htop \
-    neofetch tzdata apt-utils \
-    aptitude ubuntu-server nano \
+    wget gpg htop neofetch \
+    tzdata apt-utils nano \
     gnupg
 
 # Set shell
