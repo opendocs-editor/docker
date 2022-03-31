@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    restart: always
+    logging:
+      driver: "none"
+  api:
+    image: redstonewizard/opendocs-api
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_HOST=mongodb
+  frontend:
+    image: redstonewizard/opendocs-frontend
+    restart: unless-stopped
+    depends_on:
+      - api
+  proxy:
+    image: redstonewizard/opendocs-proxy
+    restart: unless-stopped
+    depends_on:
+      - frontend
+      - api
+    ports:
+      - 4500:4500
+    environment:
+      - MONGODB_HOST=mongodb
+      - FRONTEND_HOST=frontend
+      - API_HOST=api

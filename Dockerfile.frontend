@@ -1,0 +1,22 @@
+# Base OS
+FROM redstonewizard/node:16.14.0-ubuntu-focal
+
+# Use bash
+SHELL [ "/bin/bash", "-c" ]
+
+# Clone the API server
+RUN git clone --recursive https://github.com/opendocs-editor/3ditor.git /app
+WORKDIR /app
+
+# Install dependencies and build
+RUN unset YARN_VERSION YARN_DOWNLOAD_PREFIX YARN_DOWNLOAD_MID YARN_DOWNLOAD_SUFFIX \
+    YARN_SHASUM_EXT YARN_INSTALL_BASE_DIR YARN_INSTALL_DIR YARN_TAR_FLAGS && \
+    yarn install && \
+    yarn build
+
+# Entrypoint
+ADD frontend-docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod a+rx /docker-entrypoint.sh
+
+# Init
+ENTRYPOINT [ "/bin/bash", "/docker-entrypoint.sh" ]
